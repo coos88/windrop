@@ -1,0 +1,6 @@
+* text=auto
+# Scripts run inside WSL: keep LF.
+*.sh text eol=lf
+*.py text eol=lf
+*.rules text eol=lf
+wsl/*.conf text eol=lf

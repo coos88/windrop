@@ -1,0 +1,26 @@
+<Window x:Class="WinDrop.UI.SetupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WinDrop installeren" Width="640" Height="420"
+        WindowStartupLocation="CenterScreen" Background="{DynamicResource CardBrush}"
+        FontFamily="Segoe UI Variable Text, Segoe UI">
+  <Grid Margin="18">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    <StackPanel>
+      <TextBlock Text="AirDrop voor Windows installeren" FontSize="18" FontWeight="SemiBold" Foreground="{DynamicResource TextBrush}" />
+      <TextBlock TextWrapping="Wrap" Margin="0,6,0,0" FontSize="12.5" Foreground="{DynamicResource SubtleTextBrush}"
+                 Text="WinDrop bouwt de AirDrop-software (owly) en de driver voor je USB-wifistick in WSL, installeert ze, en deelt de stick met WSL. Je ingebouwde wifi blijft gewoon werken." />
+    </StackPanel>
+    <TextBox x:Name="LogBox" Grid.Row="1" Margin="0,12" IsReadOnly="True" FontFamily="Cascadia Mono, Consolas" FontSize="11.5"
+             VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" HorizontalScrollBarVisibility="Auto"
+             Background="{DynamicResource ButtonBrush}" Foreground="{DynamicResource TextBrush}" BorderThickness="0" Padding="8" />
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+      <Button x:Name="CloseButton" Content="Sluiten" Style="{StaticResource PillButton}" Margin="0,0,10,0" Click="Close_Click" />
+      <Button x:Name="StartButton" Content="Installeren" Style="{StaticResource AccentButton}" Click="Start_Click" />
+    </StackPanel>
+  </Grid>
+</Window>

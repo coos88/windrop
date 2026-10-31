@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>WinDrop</AssemblyName>
+    <RootNamespace>WinDrop</RootNamespace>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="WinDrop.Tests" />
+  </ItemGroup>
+
+  <!-- The WSL side (setup script, BlueZ shim) ships next to the exe. -->
+  <ItemGroup>
+    <None Include="..\..\wsl\**\*" LinkBase="wsl" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

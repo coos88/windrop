@@ -1,0 +1,7 @@
+// owly's polkit policy lets the "active" seat user lease the radio. A WSL
+// shell has no seat, so let the members of the windrop group do it.
+polkit.addRule(function (action, subject) {
+  if (action.id.indexOf("io.github.t4t5.Owly.") === 0 && subject.isInGroup("windrop")) {
+    return polkit.Result.YES;
+  }
+});
