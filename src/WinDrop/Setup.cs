@@ -26,7 +26,7 @@ public sealed class Setup(Wsl.Wsl wsl, Action<string> log)
         log("Bouwpakketten installeren (root)…");
         if (!await StepAsync(["bash", "-c",
                 "DEBIAN_FRONTEND=noninteractive apt-get update -qq && DEBIAN_FRONTEND=noninteractive apt-get install -y -qq " +
-                "build-essential flex bison libssl-dev libelf-dev bc dwarves git pkg-config curl clang >/dev/null"], true, ct))
+                "build-essential flex bison libssl-dev libelf-dev bc dwarves cpio git pkg-config curl clang >/dev/null"], true, ct))
             return false;
 
         log("owly en de wifidrivers bouwen (dit duurt 10 à 20 minuten)…");

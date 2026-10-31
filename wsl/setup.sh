@@ -15,7 +15,7 @@ HERE=$(cd "$(dirname "$0")" && pwd)
 
 echo "== packages"
 export DEBIAN_FRONTEND=noninteractive
-apt-get install -y -qq python3-dbus python3-gi polkitd hostapd iw wireless-regdb kmod linux-firmware >/dev/null
+apt-get install -y -qq python3-dbus python3-gi polkitd hostapd iw wireless-regdb kmod zstd xz-utils linux-firmware >/dev/null
 systemctl disable --now hostapd 2>/dev/null || true
 
 echo "== owly"
@@ -45,4 +45,4 @@ install -m 644 "$HERE/50-windrop-owly.rules" /etc/polkit-1/rules.d/50-windrop-ow
 
 systemctl reload dbus || true
 systemctl restart polkit || true
-echo "== klaar"
+echo "== done"

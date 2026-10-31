@@ -4,7 +4,7 @@
 #   - owly/owlyd from omdrop-owl
 # Output: $OUT/modules/*.ko and $OUT/omdrop-owl/target/release/{owly,owlyd}
 # Root packages it needs: build-essential flex bison libssl-dev libelf-dev bc
-# dwarves git pkg-config curl clang (setup installs them).
+# dwarves cpio git pkg-config curl clang (setup installs them).
 set -euo pipefail
 OUT=${WINDROP_BUILD:-$HOME/windrop-build}
 OWLY_TAG=${OWLY_TAG:-v0.4.2}
@@ -35,10 +35,12 @@ for o in MT76x2U MT76x0U MT7601U MT7921U MT7663U RTL8XXXU RTW88 RTW88_8821CU RTW
 done
 make olddefconfig >/dev/null
 # A full build: modules need vmlinux's Module.symvers to match the running kernel.
-make -j"$(nproc)" >/dev/null
-make -j"$(nproc)" modules >/dev/null
+# LOCALVERSION= (set, empty) keeps setlocalversion from appending "+", which
+# would make the vermagic differ from the running kernel's.
+make -j"$(nproc)" LOCALVERSION= >/dev/null
+make -j"$(nproc)" LOCALVERSION= modules >/dev/null
 rm -rf "$OUT/modules" && mkdir -p "$OUT/modules"
 find drivers/net/wireless net/wireless net/mac80211 -name '*.ko' -exec cp {} "$OUT/modules/" \;
 cp lib/test_firmware.ko "$OUT/modules/" 2>/dev/null || true
 echo "vermagic: $(modinfo -F vermagic "$OUT/modules/mt76x2u.ko")"
-echo "== klaar: $OUT"
+echo "== done: $OUT"
